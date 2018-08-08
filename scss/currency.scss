@@ -1,0 +1,63 @@
+.currency-component{
+  position: relative;
+  height: 140px;
+  display: block;
+}
+
+.currency-component .currency-char{
+  font-size: 10px;
+}
+
+.currency-component .currency{
+  display: inline-block;
+  width: 50%;
+  position: relative;
+  vertical-align: top;
+}
+
+.currency-component .currency > div:first-of-type{
+  margin-top: 40px;
+  margin-left: 20px;
+  font-size: 40px;
+}
+
+.currency-component .currency > div:last-of-type{
+  margin-top: 8px;
+  margin-left: 20px;
+  font-size: 14px;
+}
+
+.currency-component .value{
+  display: inline-block;
+  width: 50%;
+  position: relative;
+  vertical-align: top;
+}
+
+.currency-component .value input{
+  border: none;
+  border-bottom: 1px solid #eee;
+  line-height: 40px;
+  font-size: 40px;
+  margin-top: 40px;
+}
+
+.currency-component .value div{
+  margin-top: 6px;
+  font-size: 14px;
+}
+
+.currency-component .currencies{
+  text-align: center;
+}
+
+.currency-component .currencies > div{
+  display: inline-block;
+  font-size: 10px;
+  padding: 2px 4px;
+  cursor: pointer;
+}
+
+.currency-component .currencies > div.selected{
+  font-weight: bold;
+}

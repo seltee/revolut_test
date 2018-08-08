@@ -7,20 +7,24 @@ import { RateComponent, Value, Equal, Currency } from './styled';
 
 class Rate extends React.PureComponent {
   render() {
-    const { curFrom, curTo, quotations } = this.props;
+    const {
+      curFrom, curTo, quotations, mini
+    } = this.props;
 
     return (
-      <RateComponent>
+      <RateComponent mini={mini}>
         <Value>
-          <Currency>{getCurrencyChar(curFrom)}</Currency>
+          <Currency mini={mini}>{getCurrencyChar(curFrom)}</Currency>
           <span>1</span>
         </Value>
-        <Equal>=</Equal>
+        <Equal mini={mini}>=</Equal>
         <Value>
-          <Currency>{getCurrencyChar(curTo)}</Currency>
+          <Currency mini={mini}>{getCurrencyChar(curTo)}</Currency>
           {
             quotations[curFrom] && quotations[curTo] ?
-              <span>{getCurrencyValue(quotations[curFrom], quotations[curTo])}</span> : null
+              <span>
+                {getCurrencyValue(quotations[curFrom], quotations[curTo], mini ? 2 : 4)}
+              </span> : null
           }
         </Value>
       </RateComponent>
@@ -31,13 +35,15 @@ class Rate extends React.PureComponent {
 Rate.propTypes = {
   quotations: PropTypes.object.isRequired,
   curFrom: PropTypes.string.isRequired,
-  curTo: PropTypes.string.isRequired
+  curTo: PropTypes.string.isRequired,
+  mini: PropTypes.bool
 };
 
-export default connect(
-  (state) => ({
-    quotations: state.get('Quotations').toJS()
-  }),
-  { }
-)(Rate);
+Rate.defaultProps = {
+  mini: false
+};
+
+export default connect((state) => ({
+  quotations: state.get('Quotations').toJS()
+}))(Rate);
 

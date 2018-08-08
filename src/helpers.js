@@ -17,5 +17,5 @@ export function getCurrencyValue(fromVal, toVal, toFixed = 4) {
 }
 
 export function convertCurrency(value, fromRate, toRate) {
-  return ((value * fromRate) / toRate).toFixed(2);
+  return ((parseFloat(value) * fromRate) / toRate).toFixed(2);
 }

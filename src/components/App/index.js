@@ -1,12 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Rate from 'src/components/Rate/index';
-import RateShort from 'src/components/RateShort/index';
-import CurrencySelect from 'src/components/CurrencySelect';
-import CurrencyStatus from 'src/components/CurrencyStatus';
-import { updateQuotations } from 'src/actions/quotationsActions';
+import Rate from 'components/Rate';
+import CurrencySelect from 'components/CurrencySelect';
+import CurrencyStatus from 'components/CurrencyStatus';
+import { updateQuotations } from 'actions/quotationsActions';
 import { convertCurrency } from 'src/helpers';
-
 import { connect } from 'react-redux';
 
 import { AppComponent, DividedBlock, Border, CurrencyBig, CurrencyInput } from './styled';
@@ -97,7 +95,12 @@ class App extends React.Component {
             <CurrencyStatus currency={curFrom} />
           </div>
           <div>
-            <CurrencyInput value={valFrom} onChange={this.changeFrom} onFocus={this.changeFrom} />
+            <CurrencyInput
+              value={valFrom}
+              onChange={this.changeFrom}
+              onFocus={this.changeFrom}
+              type="number"
+            />
           </div>
         </DividedBlock>
         <CurrencySelect selected={curFrom} onSelectCurrency={this.onSelectFrom} />
@@ -109,8 +112,13 @@ class App extends React.Component {
             <CurrencyStatus currency={curTo} />
           </div>
           <div>
-            <CurrencyInput value={valTo} onChange={this.changeTo} onFocus={this.changeTo} />
-            <RateShort curFrom={curTo} curTo={curFrom} />
+            <CurrencyInput
+              value={valTo}
+              onChange={this.changeTo}
+              onFocus={this.changeTo}
+              type="number"
+            />
+            <Rate curFrom={curTo} curTo={curFrom} mini />
           </div>
         </DividedBlock>
         <CurrencySelect selected={curTo} onSelectCurrency={this.onSelectTo} />

@@ -1,26 +1,24 @@
-'use strict';
-
 const path = require('path');
 const webpack = require('webpack');
 
 module.exports = {
   entry: [
-    "./src/index.js"
+    './src/index.js'
   ],
   output: {
-    path: path.resolve(__dirname, "./www/"),
-    filename: "bundle.js"
+    filename: 'bundle.js'
   },
   resolve: {
-    extensions: ['.js', '.scss'],
+    extensions: ['.js'],
     alias: {
-      'scss': path.resolve(__dirname, './scss/'),
-      'src': path.resolve(__dirname, './src/'),
+      src: path.resolve(__dirname, './src/'),
+      components: path.resolve(__dirname, './src/components'),
+      actions: path.resolve(__dirname, './src/actions')
     }
   },
   devServer: {
     historyApiFallback: true,
-    contentBase: path.resolve(__dirname, "./static"),
+    contentBase: path.resolve(__dirname, './static'),
     hot: true,
     inline: true,
     proxy: {}
@@ -32,13 +30,13 @@ module.exports = {
         exclude: /\/node_modules/,
         use: [
           'babel-loader',
-          "eslint-loader"
+          'eslint-loader'
         ]
       },
       {
         test: /\.less|.css$/,
         exclude: /\/node_modules/,
-        loader: ["style-loader", "css-loader", "less-loader"]
+        loader: ['style-loader', 'css-loader', 'less-loader']
       },
       {
         test: /\.(png|woff|woff2|eot|ttf|svg)$/,

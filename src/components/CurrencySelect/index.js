@@ -35,10 +35,7 @@ CurrencySelect.propTypes = {
   onSelectCurrency: PropTypes.func.isRequired
 };
 
-export default connect(
-  (state) => ({
-    currencies: state.get('Balance').get('preferred').toJS()
-  }),
-  { }
-)(CurrencySelect);
+export default connect((state) => ({
+  currencies: state.get('Balance').get('preferred').toJS()
+}))(CurrencySelect);
 

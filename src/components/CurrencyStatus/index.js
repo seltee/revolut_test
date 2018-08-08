@@ -26,10 +26,7 @@ CurrencyStatus.propTypes = {
   balance: PropTypes.object.isRequired
 };
 
-export default connect(
-  (state) => ({
-    balance: state.get('Balance').toJS()
-  }),
-  { }
-)(CurrencyStatus);
+export default connect((state) => ({
+  balance: state.get('Balance').toJS()
+}))(CurrencyStatus);
 

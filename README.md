@@ -1,6 +1,7 @@
-# revolut_test
-Testing for a job in Revolut
+# Revolut Test Task
 
 npm i
+
 npm start
+
 visit http://localhost:8080/

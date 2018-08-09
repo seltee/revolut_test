@@ -5,7 +5,7 @@ import CurrencySelect from 'components/CurrencySelect';
 import CurrencyStatus from 'components/CurrencyStatus';
 import { updateQuotations } from 'actions/quotationsActions';
 import { makeExchange } from 'actions/balanceActions';
-import { convertCurrency } from 'src/helpers';
+import { convertCurrency, validateMoney, eventOnlyValue } from 'src/helpers';
 import { connect } from 'react-redux';
 
 import {
@@ -74,14 +74,14 @@ class App extends React.Component {
 
   changeFrom = (event) => {
     this.setState({
-      valFrom: event.target.value,
+      valFrom: validateMoney(event.target.value),
       editingFrom: true
     });
   };
 
   changeTo = (event) => {
     this.setState({
-      valTo: event.target.value,
+      valTo: validateMoney(event.target.value),
       editingFrom: false
     });
   };
@@ -94,8 +94,15 @@ class App extends React.Component {
   };
 
   isExchangeAvailable = () => {
-    const { curFrom, curTo, valFrom } = this.state;
-    if (this.props.balance[curFrom] >= parseFloat(valFrom) && curFrom !== curTo) {
+    const {
+      curFrom, curTo, valFrom, valTo
+    } = this.state;
+
+    if (
+      this.props.balance[curFrom] >= parseFloat(valFrom) &&
+      curFrom !== curTo &&
+      parseFloat(valFrom) > 0 &&
+      parseFloat(valTo) > 0) {
       return true;
     }
     return false;
@@ -121,7 +128,7 @@ class App extends React.Component {
               value={valFrom}
               onChange={this.changeFrom}
               onFocus={this.changeFrom}
-              type="number"
+              onKeyPress={eventOnlyValue}
             />
           </div>
         </DividedBlock>
@@ -138,7 +145,7 @@ class App extends React.Component {
               value={valTo}
               onChange={this.changeTo}
               onFocus={this.changeTo}
-              type="number"
+              onKeyPress={eventOnlyValue}
             />
             <Rate curFrom={curTo} curTo={curFrom} mini />
           </div>

@@ -39,6 +39,7 @@ export const CurrencyInput = styled.input`
   line-height: 40px;
   font-size: 40px;
   margin-top: 40px;
+  width: 100%;
 `;
 
 export const ExchangeButton = styled.button`
@@ -71,5 +72,11 @@ injectGlobal([`
   body {
     font-family: 'Open Sans', sans-serif;
     background-color: #fff;
+  }
+  
+  input[type=number]::-webkit-inner-spin-button, 
+  input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none; 
+    margin: 0; 
   }
 `]);

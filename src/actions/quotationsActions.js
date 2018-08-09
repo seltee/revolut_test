@@ -1,5 +1,5 @@
 import Axios from 'axios';
-import * as types from '../constants/actionTypes';
+import * as types from 'constants/actionTypes';
 
 const quotationsLink = 'https://www.cbr-xml-daily.ru/daily_json.js';
 

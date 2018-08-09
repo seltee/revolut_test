@@ -15,7 +15,7 @@ class CurrencyStatus extends React.PureComponent {
       <CurrencyStatusComponent>
         <span>You have </span>
         <span>{getCurrencyChar(currency)}</span>
-        <span>{balance.values[currency] ? balance.values[currency] : 0}</span>
+        <span>{balance.values[currency] ? balance.values[currency].toFixed(2) : 0}</span>
       </CurrencyStatusComponent>
     );
   }

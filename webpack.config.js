@@ -13,7 +13,8 @@ module.exports = {
     alias: {
       src: path.resolve(__dirname, './src/'),
       components: path.resolve(__dirname, './src/components'),
-      actions: path.resolve(__dirname, './src/actions')
+      actions: path.resolve(__dirname, './src/actions'),
+      constants: path.resolve(__dirname, './src/constants'),
     }
   },
   devServer: {

@@ -4,10 +4,17 @@ import Rate from 'components/Rate';
 import CurrencySelect from 'components/CurrencySelect';
 import CurrencyStatus from 'components/CurrencyStatus';
 import { updateQuotations } from 'actions/quotationsActions';
+import { makeExchange } from 'actions/balanceActions';
 import { convertCurrency } from 'src/helpers';
 import { connect } from 'react-redux';
 
-import { AppComponent, DividedBlock, Border, CurrencyBig, CurrencyInput } from './styled';
+import {
+  AppComponent,
+  DividedBlock,
+  Border, CurrencyBig,
+  CurrencyInput,
+  ExchangeButton
+} from './styled';
 
 class App extends React.Component {
   constructor(props) {
@@ -79,6 +86,21 @@ class App extends React.Component {
     });
   };
 
+  exchange = () => {
+    const { curFrom, curTo, valFrom } = this.state;
+    if (this.isExchangeAvailable()) {
+      this.props.makeExchange(valFrom, curFrom, curTo);
+    }
+  };
+
+  isExchangeAvailable = () => {
+    const { curFrom, curTo, valFrom } = this.state;
+    if (this.props.balance[curFrom] >= parseFloat(valFrom) && curFrom !== curTo) {
+      return true;
+    }
+    return false;
+  };
+
   render() {
     const {
       curFrom, curTo, valFrom, valTo
@@ -122,19 +144,30 @@ class App extends React.Component {
           </div>
         </DividedBlock>
         <CurrencySelect selected={curTo} onSelectCurrency={this.onSelectTo} />
+
+        <Border />
+        <ExchangeButton
+          onClick={this.exchange}
+          isAvailable={this.isExchangeAvailable()}
+        >
+          Exchange
+        </ExchangeButton>
       </AppComponent>
     );
   }
 }
 
 App.propTypes = {
-  updateQuotations: PropTypes.func.isRequired
+  updateQuotations: PropTypes.func.isRequired,
+  makeExchange: PropTypes.func.isRequired,
+  balance: PropTypes.object.isRequired
 };
 
 export default connect(
   (state) => ({
-    quotations: state.get('Quotations').toJS()
+    quotations: state.get('Quotations').toJS(),
+    balance: state.get('Balance').get('values').toJS()
   }),
-  { updateQuotations }
+  { updateQuotations, makeExchange }
 )(App);
 

@@ -41,6 +41,23 @@ export const CurrencyInput = styled.input`
   margin-top: 40px;
 `;
 
+export const ExchangeButton = styled.button`
+  height: 50px;
+  line-height: 50px;
+  font-size: 20px;
+  display: block;
+  cursor: pointer;
+  background: none;
+  border: none;
+  width: 100%;
+  opacity: ${(props) => (props.isAvailable ? 0.8 : 0.2)}
+  pointer-events: ${(props) => (props.isAvailable ? 'all' : 'none')}
+  
+  :hover {
+    opacity: 1
+  }
+`;
+
 injectGlobal([`
   * {
     margin: 0;

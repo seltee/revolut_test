@@ -1,5 +1,5 @@
 import { Map } from 'immutable';
-import * as types from '../constants/actionTypes';
+import * as types from 'constants/actionTypes';
 
 const initialState = Map({
   RUB: 1
